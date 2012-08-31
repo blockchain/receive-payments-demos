@@ -31,5 +31,13 @@ if(!$database->queryExec($query, $error))
   echo  $error;
 }
 
+//add Movie table to database
+$query = 'CREATE TABLE pending_invoice_payments ' .
+         '(transaction_hash CHAR(64), value DOUBLE, invoice_id INTEGER, PRIMARY KEY (transaction_hash))';
+         
+if(!$database->queryExec($query, $error))
+{
+  echo  $error;
+}
 
 ?>

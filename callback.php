@@ -5,6 +5,7 @@ $transaction_hash = $_GET['transaction_hash'];
 $value_in_btc = $_GET['value'] / 100000000;
 $my_bitcoin_address = "1A8JiWcwvpY7tAopUkSnGuEYHmzGYfZPiq";
 
+
 //Commented out to test, uncomment when live
 if ($_GET['test'] == true) {
     return;
@@ -24,13 +25,21 @@ $hosts = gethostbynamel('blockchain.info');
 foreach ($hosts as $ip) {
     if ($_SERVER['REMOTE_ADDR'] == $ip) {
 
-      	//Add the invoice to the database
-  		$query = "replace INTO invoice_payments (invoice_id, transaction_hash, value) values($invoice_id, '$transaction_hash', $value_in_btc)";
-
-
-  		if($database->queryExec($query, $error)) {
-  		   echo "*ok*";
-  		}
+		if ($_GET['confirmations'] >= 6) {
+		  //Add the invoice to the database
+		  $query = "replace INTO invoice_payments (invoice_id, transaction_hash, value) values($invoice_id, '$transaction_hash', $value_in_btc)";
+  
+		  if($database->queryExec($query, $error)) {
+			 echo "*ok*";
+		  }
+    	} else {
+			
+		  $query = "replace INTO pending_invoice_payments (invoice_id, transaction_hash, value) values($invoice_id, '$transaction_hash', $value_in_btc)";
+  
+		  if($database->queryExec($query, $error)) {
+			 //Don't acknowledge the callback yet
+		  }
+		}
 
       return;
     }

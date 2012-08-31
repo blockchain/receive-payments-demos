@@ -5,7 +5,7 @@ $price_in_usd = 349;
 $product_url = 'nutbolt.jpg';
 $my_bitcoin_address = "1A8JiWcwvpY7tAopUkSnGuEYHmzGYfZPiq";
 $callback_url = "http://mysite.com?invoice_id=" . $invoice_id;
-$root = "https://blockchain.info"; 
+$root = "http://local.blockchain.info:8080/"; 
 $price_in_btc = file_get_contents($root . "tobtc?currency=USD&value=" . $price_in_usd);
 
 try 
@@ -45,7 +45,7 @@ if(!$database->queryExec($query, $error))
        <img src="mockup_cart.png">
 
         <div style="font-size:16px;margin:10px;width:300px;cursor:pointer;margin-left:750px;margin-top:20px" class="blockchain-btn"
-             data-address="<?php $my_bitcoin_address ?>"
+             data-address="<?php echo $my_bitcoin_address ?>"
              data-anonymous="false"
              data-confirmations="0"
              data-callback="<?php echo $$callback_url; ?>">

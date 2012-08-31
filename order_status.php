@@ -5,6 +5,7 @@ $product_url = '';
 $price_in_usd = 0;
 $price_in_btc = 0;
 $amount_paid_btc = 0;
+$amount_pending_btc = 0;
 
 try {
   //create or open the database
@@ -33,7 +34,22 @@ else
   die($error);
 }
 
-//find the amount paid
+//find the pending amount paid
+$query = "select SUM(value) as value from pending_invoice_payments where invoice_id = $invoice_id";
+         
+if($result = $database->query($query, SQLITE_BOTH, $error))
+{
+  if($row = $result->fetch())
+  {
+	$amount_pending_btc = $row['value'];  
+  } 
+}
+else
+{
+  die($error);
+}
+
+//find the confirmed amount paid
 $query = "select SUM(value) as value from invoice_payments where invoice_id = $invoice_id";
          
 if($result = $database->query($query, SQLITE_BOTH, $error))
@@ -47,6 +63,7 @@ else
 {
   die($error);
 }
+
 
 ?>
 
@@ -62,7 +79,11 @@ Amount Due : <?php echo $price_in_usd ?> USD (<?php echo $price_in_btc ?> BTC)
 </p>
 
 <p>
-Amount Paid : <?php echo $amount_paid_btc ?> BTC
+Amount Pending : <?php echo $amount_pending_btc ?> BTC
+</p>
+
+<p>
+Amount Confirmed : <?php echo $amount_paid_btc ?> BTC
 </p>
 
 <?php if ($amount_paid_btc < $price_in_btc) { ?> 
