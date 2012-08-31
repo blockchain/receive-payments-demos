@@ -25,7 +25,7 @@ $hosts = gethostbynamel('blockchain.info');
 foreach ($hosts as $ip) {
     if ($_SERVER['REMOTE_ADDR'] == $ip) {
 
-		if ($_GET['confirmations'] >= 6) {
+		if ($_GET['confirmations'] >= 6 || $_GET['anonymous'] == true) {
 		  //Add the invoice to the database
 		  $query = "replace INTO invoice_payments (invoice_id, transaction_hash, value) values($invoice_id, '$transaction_hash', $value_in_btc)";
   
