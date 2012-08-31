@@ -5,7 +5,6 @@ $product_url = '';
 $price_in_usd = 0;
 $price_in_btc = 0;
 $amount_paid_btc = 0;
-$root = "https://blockchain.info";
 
 try {
   //create or open the database
