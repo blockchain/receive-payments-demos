@@ -5,7 +5,7 @@ $price_in_usd = 349;
 $product_url = 'nutbolt.jpg';
 $my_bitcoin_address = "1A8JiWcwvpY7tAopUkSnGuEYHmzGYfZPiq";
 $callback_url = "http://mysite.com?invoice_id=" . $invoice_id;
-$root = "http://local.blockchain.info:8080/"; 
+$root = "https://blockchain.info/"; 
 $price_in_btc = file_get_contents($root . "tobtc?currency=USD&value=" . $price_in_usd);
 
 try 
