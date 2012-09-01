@@ -47,7 +47,6 @@ if(!$database->queryExec($query, $error))
         <div style="font-size:16px;margin:10px;width:300px;cursor:pointer;margin-left:750px;margin-top:20px" class="blockchain-btn"
              data-address="<?php echo $my_bitcoin_address ?>"
              data-anonymous="false"
-             data-confirmations="0"
              data-callback="<?php echo $$callback_url; ?>">
             <div class="blockchain stage-begin">
                 <img src="<?php echo $root ?>Resources/buttons/pay_now_64.png">
