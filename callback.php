@@ -3,7 +3,7 @@
 $invoice_id = $_GET['invoice_id'];
 $transaction_hash = $_GET['transaction_hash'];
 $value_in_btc = $_GET['value'] / 100000000;
-$my_bitcoin_address = "1A8JiWcwvpY7tAopUkSnGuEYHmzGYfZPiq";
+$my_bitcoin_address = "138YfXXXqizQHqyrUHZs4KAC6VuaBwSjgv";
 
 
 //Commented out to test, uncomment when live
