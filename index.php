@@ -4,7 +4,8 @@ $invoice_id = 6296;
 $price_in_usd = 349;
 $product_url = 'nutbolt.jpg';
 $my_bitcoin_address = "1A8JiWcwvpY7tAopUkSnGuEYHmzGYfZPiq";
-$callback_url = "http://mysite.com?invoice_id=" . $invoice_id;
+$secret = "CHANGE_TO_RANDOM_SECRET";
+$callback_url = "http://mysite.com?invoice_id=" . $invoice_id . "&secret=" . $secret;
 $root = "https://blockchain.info/"; 
 $price_in_btc = file_get_contents($root . "tobtc?currency=USD&value=" . $price_in_usd);
 
