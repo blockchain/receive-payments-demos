@@ -1,43 +1,47 @@
-<?
+<?php
+
+include 'include.php';
+
+mysql_connect($mysql_host, $mysql_username, $mysql_password) or die(__LINE__ . ' Invalid connect: ' . mysql_error());
+
+mysql_select_db($mysql_database) or die( "Unable to select database. Run setup first.");
 
 $invoice_id = $_GET['invoice_id'];
 $transaction_hash = $_GET['transaction_hash'];
 $value_in_btc = $_GET['value'] / 100000000;
-$secret = "CHANGE_TO_RANDOM_SECRET";
-$my_bitcoin_address = "138YfXXXqizQHqyrUHZs4KAC6VuaBwSjgv";
 
 //Commented out to test, uncomment when live
 if ($_GET['test'] == true) {
-    return;
+  echo 'Ignoring Test Callback';
+  return;
 }
 
-if ($_GET['address'] != $my_bitcoin_address)
+if ($_GET['address'] != $my_bitcoin_address) {
+    echo 'Incorrect Receiving Address';
   return;
-
-if ($_GET['secret'] != $secret)
-  return;
-
-try {
-  //create or open the database
-  $database = new SQLiteDatabase('db.sqlite', 0666, $error);
-} catch(Exception $e) {
-  die($error);
 }
 
-if ($_GET['confirmations'] >= 6 || $_GET['anonymous'] == true) {
+if ($_GET['secret'] != $secret) {
+  echo 'Invalid Secret';
+  return;
+}
+
+if ($_GET['confirmations'] >= 6 || $_GET['shared'] == true) {
   //Add the invoice to the database
-  $query = "replace INTO invoice_payments (invoice_id, transaction_hash, value) values($invoice_id, '$transaction_hash', $value_in_btc)";
+  $result = mysql_query("replace INTO invoice_payments (invoice_id, transaction_hash, value) values($invoice_id, '$transaction_hash', $value_in_btc)");
 
-  if($database->queryExec($query, $error)) {
-	 echo "*ok*";
+  //Delete from pending
+  mysql_query("delete from pending_invoice_payments where invoice_id = $invoice_id limit 1");
+
+  if($result) {
+	   echo "*ok*";
   }
 } else {
-	
-  $query = "replace INTO pending_invoice_payments (invoice_id, transaction_hash, value) values($invoice_id, '$transaction_hash', $value_in_btc)";
+   //Waiting for confirmations
+   //create a pending payment entry
+   mysql_query("replace INTO pending_invoice_payments (invoice_id, transaction_hash, value) values($invoice_id, '$transaction_hash', $value_in_btc)");
 
-  if($database->queryExec($query, $error)) {
-	 //Don't acknowledge the callback yet
-  }
+   echo "Waiting for confirmations";
 }
 
 ?>
