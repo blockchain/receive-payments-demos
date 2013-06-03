@@ -26,7 +26,7 @@ if ($_GET['secret'] != $secret) {
   return;
 }
 
-if ($_GET['confirmations'] >= 6 || $_GET['shared'] == true) {
+if ($_GET['confirmations'] >= 4) {
   //Add the invoice to the database
   $result = mysql_query("replace INTO invoice_payments (invoice_id, transaction_hash, value) values($invoice_id, '$transaction_hash', $value_in_btc)");
 
