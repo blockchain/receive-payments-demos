@@ -1,4 +1,3 @@
-
 <p class="p1"><b>Notes</b></p>
 <p class="p2"><b></b><br></p>
 <p class="p1">Simple PHP example of using the blockchain.info receive payments API to process payments in PHP.</p>
@@ -17,7 +16,7 @@
 <p class="p4"><br></p>
 <p class="p3">Navigate to setup.php in your browser</p>
 <p class="p4"><br></p>
-<p class="p3">http://loclahost/receive_payment_php_demo/setup.php</p>
+<p class="p3">http://localhost/receive_payment_php_demo/setup.php</p>
 <p class="p3">Now the database is intilizaized open the demo</p>
 <p class="p4"><br></p>
-<p class="p3">http://loclahost/receive_payment_php_demo/index.php</p>
+<p class="p3">http://localhost/receive_payment_php_demo/index.php</p>
