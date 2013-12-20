@@ -36,7 +36,7 @@ if (!$result) {
     <body>
        <h1>Buy Nuts and Bolts</h1>
 
-        <div class="blockchain-btn" style="width:auto" data-create-url="create.php"> 
+        <div class="blockchain-btn" style="width:auto" data-create-url="create.php?invoice_id=<?php echo $invoice_id; ?>"> 
             <div class="blockchain stage-begin">
                 <img src="<?php echo $blockchain_root ?>Resources/buttons/pay_now_64.png">
             </div>
