@@ -45,7 +45,7 @@ if (!$result) {
             </div>
             <div class="blockchain stage-ready" style="text-align:center">
                 Please send <?php echo $price_in_btc ?> BTC to <br /> <b>[[address]]</b> <br /> 
-                <img style="margin:5px" id="qrsend" src="<?=$blockchain_root?>qr?data=bitcoin:<?=$my_bitcoin_address?>%3Famount=<?=$price_in_btc?>%26label=Pay-Demo&size=125" alt=""/>
+                <div class="qr-code"></div>
             </div>
             <div class="blockchain stage-paid">
                 Payment Received <b>[[value]] BTC</b>. Thank You.
