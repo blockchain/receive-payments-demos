@@ -12,6 +12,6 @@ Do not use in production as is.
 	* cd /www/receive_payment_php_demo
 	* chmod 755 ./
 	* Navigate to setup.php in your browser
-	* http://loclahost/receive_payment_php_demo/setup.php
+	* http://localhost/receive_payment_php_demo/setup.php
 	* Now the database is intilizaized open the demo
 	* http://localhost/receive_payment_php_demo/index.php
