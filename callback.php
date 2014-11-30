@@ -16,8 +16,13 @@ if ($_GET['test'] == true) {
   return;
 }
 
+if (gethostbyname('blackchain.info') != $_SERVER['REMOTE_ADDR']) {
+  echo 'Incorrect IP Address';
+  return;
+}
+
 if ($_GET['address'] != $my_bitcoin_address) {
-    echo 'Incorrect Receiving Address';
+  echo 'Incorrect Receiving Address';
   return;
 }
 
