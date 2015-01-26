@@ -3,7 +3,7 @@ Simple PHP example of using the blockchain.info receive payments API to process 
 
 https://blockchain.info/api/api_receive
 
-Show an invoice the the User with a javascript payment button, on payment received redirects to a status page. When the payment is fully confirmed shows the user nutsandbolts.jpg i.e. the product.
+Show an invoice to the User with a JavaScript payment button. On payment received, redirect to a status page. When the payment is fully confirmed shows the user nutsandbolts.jpg i.e. the product.
 
 Do not use in production as is.
 
@@ -12,6 +12,6 @@ Do not use in production as is.
 	* cd /www/receive_payment_php_demo
 	* chmod 755 ./
 	* Navigate to setup.php in your browser
-	* http://loclahost/receive_payment_php_demo/setup.php
-	* Now the database is intilizaized open the demo
+	* http://localhost/receive_payment_php_demo/setup.php
+	* Now the database is initialized open the demo
 	* http://localhost/receive_payment_php_demo/index.php
