@@ -1,2 +1,3 @@
 db.sqlite
 .DS_Store
+/trunk/bitcoin_demo/includes.php
