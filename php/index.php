@@ -40,7 +40,7 @@ if (!$result) {
 
         <div class="blockchain-btn" style="width:auto" data-create-url="create.php"> 
             <div class="blockchain stage-begin">
-                <img src="<?php echo $blockchain_root ?>Resources/buttons/pay_now_64.png">
+                <img src="pay_now_64.png">
             </div>
             <div class="blockchain stage-loading" style="text-align:center">
                 <img src="<?php echo $blockchain_root ?>Resources/loading-large.gif">
