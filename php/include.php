@@ -1,9 +1,11 @@
 <?php
 
-$blockchain_root = "https://blockchain.info/"; 
+$blockchain_root = "https://blockchain.info/";
+$blockchain_receive_root = "https://api.blockchain.info/";
 $mysite_root = "http://mysite.com/";
 $secret = "CHANGE_TO_RANDOM_SECRET";
-$my_bitcoin_address = "1A8JiWcwvpY7tAopUkSnGuEYHmzGYfZPiq";
+$my_xpub = "CHANGE_TO_XPUB_KEY";
+$my_api_key = "CHANGE_TO_API_KEY";
 
 //Database
 $mysql_host = 'localhost';
