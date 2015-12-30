@@ -25,7 +25,7 @@ if (!$result) {
 <html>
 <head>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-    <script type="text/javascript" src="<? echo $blockchain_root ?>Resources/wallet/pay-now-button-v2.js"></script>
+    <script type="text/javascript" src="<?php echo $blockchain_root ?>Resources/wallet/pay-now-button-v2.js"></script>
     
     <script type="text/javascript">
 	$(document).ready(function() {
@@ -43,7 +43,7 @@ if (!$result) {
                 <img src="pay_now_64.png">
             </div>
             <div class="blockchain stage-loading" style="text-align:center">
-                <img src="<?php echo $blockchain_root ?>Resources/loading-large.gif">
+                <img src="<?php echo $blockchain_root; ?>Resources/loading-large.gif">
             </div>
             <div class="blockchain stage-ready" style="text-align:center">
                 Please send <?php echo $price_in_btc; ?> BTC to <br /> <b>[[address]]</b> <br />
