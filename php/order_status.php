@@ -9,37 +9,57 @@ $price_in_btc = 0;
 $amount_paid_btc = 0;
 $amount_pending_btc = 0;
 
-mysql_connect($mysql_host, $mysql_username, $mysql_password) or die(__LINE__ . ' Invalid connect: ' . mysql_error());
+$db = new mysqli($mysql_host, $mysql_username, $mysql_password) or die(__LINE__ . ' Invalid connect: ' . mysqli_error());
+$db->select_db($mysql_database) or die( "Unable to select database. Run setup first.");
 
-mysql_select_db($mysql_database) or die( "Unable to select database. Run setup first.");
+$stmt = $db->prepare("select price_in_usd, product_url, price_in_btc from invoices where invoice_id = ?");
+$stmt->bind_param("i",$invoice_id);
+$success = $stmt->execute();
 
-//find the invoice form the database
-$result = mysql_query("select price_in_usd, product_url, price_in_btc from invoices where invoice_id = $invoice_id");
-        
-if (!$result) {
+if (!$success) {
     die(__LINE__ . ' Invalid query: ' . mysql_error());
 }
 
-while($row = mysql_fetch_array($result)) {
-	$product_url = $row['product_url'];  
+$result = $stmt->get_result();
+while($row = $result->fetch_array()) {
+	$product_url = $row['product_url'];
 	$price_in_usd = $row['price_in_usd'];
-	$price_in_btc = $row['price_in_btc'];  
+	$price_in_btc = $row['price_in_btc'];
 }
 
-//find the pending amount paid
-$result = mysql_query("select value from pending_invoice_payments where invoice_id = $invoice_id");
-         
-while($row = mysql_fetch_array($result)){
+$result->close();
+$stmt->close(); 
+
+$stmt = $db->prepare("select value from pending_invoice_payments where invoice_id = ?");
+$stmt->bind_param("i",$invoice_id);
+$success = $stmt->execute();
+
+if (!$success) {
+    die(__LINE__ . ' Invalid query: ' . mysql_error());
+}
+$result = $stmt->get_result();
+while($row = $result->fetch_array()){
 	 $amount_pending_btc += $row['value'];   
 }
 
+$result->close();
+$stmt->close(); 
+
 //find the confirmed amount paid
-$result = mysql_query("select value from invoice_payments where invoice_id = $invoice_id");
+$stmt = $db->prepare("select value from invoice_payments where invoice_id = ?");
+$stmt->bind_param("i",$invoice_id);
+$success = $stmt->execute();
+
+if (!$success) {
+    die(__LINE__ . ' Invalid query: ' . mysql_error());
+}
+$result = $stmt->get_result();
          
-while($row = mysql_fetch_array($result)){
+while($row = $result->fetch_array()){
 	$amount_paid_btc += $row['value']; 
 }
-
+$result->close();
+$stmt->close(); 
 ?>
 
 <html>

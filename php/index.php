@@ -7,15 +7,17 @@ $price_in_usd = 0.15;
 $product_url = 'nutbolt.jpg';
 $price_in_btc = file_get_contents($blockchain_root . "tobtc?currency=USD&value=" . $price_in_usd);
 
-mysql_connect($mysql_host, $mysql_username, $mysql_password) or die(__LINE__ . ' Invalid connect: ' . mysql_error());
+$db = new mysqli($mysql_host, $mysql_username, $mysql_password) or die(__LINE__ . ' Invalid connect: ' . mysqli_error());
 
-mysql_select_db($mysql_database) or die( "Unable to select database. Run setup first.");
+$db->select_db($mysql_database) or die( "Unable to select database. Run setup first.");
 
 //Add the invoice to the database
-$result = mysql_query("replace INTO invoices (invoice_id, price_in_usd, price_in_btc, product_url) values($invoice_id,'$price_in_usd','$price_in_btc','$product_url')");
-    
+$stmt = $db->prepare("replace INTO invoices (invoice_id, price_in_usd, price_in_btc, product_url) values(?,?,?,?)");
+$stmt->bind_param("idds",$invoice_id, $price_in_usd, $price_in_btc, $product_url);
+$result = $stmt->execute();
+
 if (!$result) {
-    die(__LINE__ . ' Invalid query: ' . mysql_error());
+    die(__LINE__ . ' Invalid query: ' . mysqli_error($db));
 }
 
 ?>
