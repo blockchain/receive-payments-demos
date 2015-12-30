@@ -38,7 +38,7 @@ if (!$result) {
     <body>
        <h1>Buy Nuts and Bolts</h1>
 
-        <div class="blockchain-btn" style="width:auto" data-create-url="create.php"> 
+        <div class="blockchain-btn" style="width:auto" data-create-url="create.php?invoice_id=<?php echo $invoice_id; ?>"> 
             <div class="blockchain stage-begin">
                 <img src="pay_now_64.png">
             </div>
@@ -46,8 +46,8 @@ if (!$result) {
                 <img src="<?php echo $blockchain_root ?>Resources/loading-large.gif">
             </div>
             <div class="blockchain stage-ready" style="text-align:center">
-                Please send <?php echo $price_in_btc ?> BTC to <br /> <b>[[address]]</b> <br /> 
-                <img style="margin:5px" id="qrsend" src="<?=$blockchain_root?>qr?data=bitcoin:<?=$my_bitcoin_address?>%3Famount=<?=$price_in_btc?>%26label=Pay-Demo&size=125" alt=""/>
+                Please send <?php echo $price_in_btc; ?> BTC to <br /> <b>[[address]]</b> <br />
+                <div class='qr-code'></div>
             </div>
             <div class="blockchain stage-paid">
                 Payment Received <b>[[value]] BTC</b>. Thank You.
