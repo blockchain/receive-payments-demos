@@ -10,7 +10,7 @@ if (!$result) {
     die(__LINE__ . ' Invalid connect: ' . mysql_error());
 }
 
-$result = mysql_query('CREATE DATABASE IF NOT EXISTS ' . $mysql_database);
+$result = mysql_query('CREATE DATABASE IF NOT EXISTS `' . $mysql_database . '`');
 
 if (!$result) {
     die(__LINE__ . ' Invalid query: ' . mysql_error());
