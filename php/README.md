@@ -4,5 +4,5 @@
     * chmod 755 ./
     * Navigate to setup.php in your browser
     * http://localhost/receive_payment_php_demo/setup.php
-    * Now the database is intilizaized open the demo
+    * Now the database is initialized open the demo
     * http://localhost/receive_payment_php_demo/index.php
