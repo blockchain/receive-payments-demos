@@ -7,10 +7,10 @@ def connect_db():
     return sqlite3.connect(app.config['DATABASE'])
 
 def setup_db():
-  with closing(connect_db()) as db:
-    with app.open_resource('../../resources/setup.sql') as fd:
-      db.cursor().executescript(fd.read())
-    db.commit()
+    with closing(connect_db()) as db:
+        with app.open_resource('../../resources/setup.sql') as fd:
+            db.cursor().executescript(fd.read())
+        db.commit()
 
 def get_db():
     db = getattr(g, '_database', None)
