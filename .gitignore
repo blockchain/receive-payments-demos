@@ -1,2 +1,5 @@
 db.sqlite
 .DS_Store
+*.pyc
+*.pyo
+python/venv/*
