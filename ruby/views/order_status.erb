@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<img src="/invoice.png">
+
+<h2>Invoice <%= invoice_id %></h2>
+<p>
+Amount Due : <%= price_in_usd %> USD (<%= price_in_btc %> BTC) 
+</p>
+
+<p>
+Amount Pending : <%= pending %> BTC
+</p>
+
+<p>
+Amount Confirmed : <%= confirmed %> BTC
+</p>
+<% if confirmed == 0 and pending == 0 %>
+<p>Payment not received.</p>
+<% elsif confirmed < price_in_btc %>
+<p>Waiting for Payment Confirmation:
+<a href="order_status/<%= invoice_id %>">Refresh</a></p>
+<% else %>
+<p>
+Thank You for your purchase
+</p>
+<img src="/nutbolt.jpg">
+<% end %>
+</body>
+</html>
