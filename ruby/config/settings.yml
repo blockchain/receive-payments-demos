@@ -1,0 +1,13 @@
+---
+blockchain_root: https://blockchain.info
+xpub: your xpub key
+api_key: your api key
+secret: too_many_secrets
+db:
+  path: /tmp/ruby-demo.db
+app:
+  static_path: ../resources/static
+  base_url: http://ruby-demo.dev:9393/
+  invoice_id: 9001
+  price_in_usd: 0.15
+  product_url: 'nutbolt.jpg'
