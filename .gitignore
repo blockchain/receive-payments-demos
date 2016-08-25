@@ -1,2 +1,6 @@
 db.sqlite
 .DS_Store
+*.pyc
+*.pyo
+python/venv/*
+ruby/config/settings.local.yml
