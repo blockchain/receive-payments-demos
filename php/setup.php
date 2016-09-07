@@ -18,7 +18,7 @@ if (!$result) {
 
 mysql_select_db($mysql_database) or die( "Unable to select database. Run setup first.");
 
-$result = mysql_query('CREATE TABLE IF NOT EXISTS invoices (invoice_id INTEGER, price_in_usd DOUBLE, price_in_btc DOUBLE, product_url TEXT, PRIMARY KEY (invoice_id))');
+$result = mysql_query('CREATE TABLE IF NOT EXISTS invoices (invoice_id INTEGER, price_in_usd DOUBLE, price_in_btc DOUBLE, address TEXT, product_url TEXT, PRIMARY KEY (invoice_id))');
 
 if (!$result) {
     die(__LINE__ . ' Invalid query: ' . mysql_error());
