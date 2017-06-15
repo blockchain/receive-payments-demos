@@ -17,7 +17,7 @@ class Demo < Sinatra::Base
   get '/' do
     invoice_id = Settings.app.invoice_id
     price_in_usd = Settings.app.price_in_usd
-    price_in_btc = Blockchain.to_btc('USD', Settings.app.price_in_usd)
+    price_in_btc = "%f" %  Blockchain::ExchangeRateExplorer.new.to_btc('USD', Settings.app.price_in_usd)
     db.execute %{
       INSERT OR IGNORE INTO invoices
       (invoice_id, price_in_usd, price_in_btc, product_url)
@@ -27,13 +27,14 @@ class Demo < Sinatra::Base
     erb :invoice, locals: {
       blockchain_root: Settings.blockchain_root,
       invoice_id: Settings.app.invoice_id,
-      price_in_btc: Blockchain.to_btc('USD', Settings.app.price_in_usd)
+      price_in_btc: "%f" % Blockchain::ExchangeRateExplorer.new.to_btc('USD', Settings.app.price_in_usd)
     }
   end
 
   get '/create_handler/:invoice_id' do |invoice_id|
-    callback_url = URI.join(Settings.app.base_url, 'payment', invoice_id)
-    resp = Blockchain::V2.receive(Settings.xpub, callback_url, Settings.api_key)
+    callback_url = Settings.app.base_url
+    puts callback_url
+    resp = Blockchain::V2::Receive.new().receive(Settings.xpub, callback_url, Settings.api_key, 50)
     db.execute %{
       UPDATE invoices
       SET address = ?
