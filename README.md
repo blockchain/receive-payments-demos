@@ -1,7 +1,7 @@
 # Notes
 This repository contains simple examples of how to use the blockchain.info receive payments API V2 to process bitcoin payments.
 
-To use Receive Payments v2 you'll need an xpub address corresponding to an HD wallet. If you don't already have this, you can obtain one from the [alpha version of our new wallet](https://alpha.blockchain.info). You'll also need a [V2 API Key](https://api.blockchain.info/v2/apikey/request/) — please note that this new API key is mandatory for Receive API v2, and is distinct from the (optional) API key you might already use elsewhere in the Blockchain API.
+To use Receive Payments v2 you'll need an xPub address corresponding to an HD wallet. If you don't already have this, you can obtain one by [creating a new wallet](https://blockchain.info/wallet/#/signup). You'll also need a [V2 API Key](https://api.blockchain.info/v2/apikey/request/) — please note that this new API key is mandatory for Receive API v2, and is distinct from the (optional) API key you might already use elsewhere in the Blockchain API.
 
 Further documentation & explanation can be found at: https://blockchain.info/api/api_receive
 
