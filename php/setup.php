@@ -5,35 +5,37 @@
 
 include 'include.php';
 
-$result = mysql_connect($mysql_host, $mysql_username, $mysql_password);
-if (!$result) {
-    die(__LINE__ . ' Invalid connect: ' . mysql_error());
+$mysqli = new mysqli($mysql_host, $mysql_username, $mysql_password);
+if ($mysqli->connect_error) {
+    die(__LINE__ . ' Invalid connect: ' . $mysqli->connect_errno);
 }
 
-$result = mysql_query('CREATE DATABASE IF NOT EXISTS `' . $mysql_database . '`');
+$result = $mysqli->query('CREATE DATABASE IF NOT EXISTS `' . $mysql_database . '`');
 
 if (!$result) {
-    die(__LINE__ . ' Invalid query: ' . mysql_error());
+    die(__LINE__ . ' Invalid query: ' . $mysqli->errno);
 }
 
-mysql_select_db($mysql_database) or die( "Unable to select database. Run setup first.");
+$mysqli->select_db($mysql_database);
+if (!$result) {
+    die(__LINE__ . ' Unable to select database. Run setup first: ' . $mysqli->errno);
+}
 
-$result = mysql_query('CREATE TABLE IF NOT EXISTS invoices (invoice_id INTEGER, price_in_usd DOUBLE, price_in_btc DOUBLE, product_url TEXT, PRIMARY KEY (invoice_id))');
+$result = $mysqli->query('CREATE TABLE IF NOT EXISTS invoices (invoice_id INTEGER, price_in_usd DOUBLE, price_in_btc DOUBLE, product_url TEXT, PRIMARY KEY (invoice_id))');
 
 if (!$result) {
-    die(__LINE__ . ' Invalid query: ' . mysql_error());
+    die(__LINE__ . ' Invalid query: ' . $mysqli->errno);
 }
 
-$result = mysql_query('CREATE TABLE IF NOT EXISTS invoice_payments (transaction_hash CHAR(64), value DOUBLE, invoice_id INTEGER, PRIMARY KEY (transaction_hash))');
+$result = $mysqli->query('CREATE TABLE IF NOT EXISTS invoice_payments (transaction_hash CHAR(64), value DOUBLE, invoice_id INTEGER, PRIMARY KEY (transaction_hash))');
      
 if (!$result) {
-    die(__LINE__ . ' Invalid query: ' . mysql_error());
+    die(__LINE__ . ' Invalid query: ' . $mysqli->errno);
 }
 
-$result = mysql_query('CREATE TABLE IF NOT EXISTS pending_invoice_payments (transaction_hash CHAR(64), value DOUBLE, invoice_id INTEGER, PRIMARY KEY (transaction_hash))');
+$result = $mysqli->query('CREATE TABLE IF NOT EXISTS pending_invoice_payments (transaction_hash CHAR(64), value DOUBLE, invoice_id INTEGER, PRIMARY KEY (transaction_hash))');
   
 if (!$result) {
-    die(__LINE__ . ' Invalid query: ' . mysql_error());
+    die(__LINE__ . ' Invalid query: ' . $mysqli->errno);
 }
 
-?>
