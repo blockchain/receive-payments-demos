@@ -17,7 +17,7 @@ class Demo < Sinatra::Base
   get '/' do
     invoice_id = Settings.app.invoice_id
     price_in_usd = Settings.app.price_in_usd
-    price_in_btc = "%f" %  Blockchain::ExchangeRateExplorer.new.to_btc('USD', Settings.app.price_in_usd)
+    price_in_btc = Blockchain::ExchangeRateExplorer.new.to_btc('USD', Settings.app.price_in_usd)
     db.execute %{
       INSERT OR IGNORE INTO invoices
       (invoice_id, price_in_usd, price_in_btc, product_url)
@@ -65,7 +65,7 @@ class Demo < Sinatra::Base
 
     erb :order_status, locals: {
       invoice_id: invoice_id,
-      price_in_btc: order[0],
+      price_in_btc: "%f" % order[0],
       price_in_usd: order[1],
       pending: (pending or 0),
       confirmed: (confirmed or 0)
