@@ -21,7 +21,7 @@ if (!$result) {
     die(__LINE__ . ' Unable to select database. Run setup first: ' . $mysqli->errno);
 }
 
-$result = $mysqli->query('CREATE TABLE IF NOT EXISTS invoices (invoice_id INTEGER, price_in_usd DOUBLE, price_in_btc DOUBLE, product_url TEXT, PRIMARY KEY (invoice_id))');
+$result = $mysqli->query('CREATE TABLE IF NOT EXISTS invoices (invoice_id INTEGER, price_in_usd DOUBLE, price_in_btc DOUBLE, product_url TEXT, address CHAR(35), PRIMARY KEY (invoice_id))');
 
 if (!$result) {
     die(__LINE__ . ' Invalid query: ' . $mysqli->errno);
